@@ -1,0 +1,28 @@
+{
+  "name": "noderatelimiter",
+  "version": "1.0.0",
+  "description": "An in-memory rate limiter for request throttling",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saverious/NodeRateLimiter.git"
+  },
+  "keywords": [
+    "rate-limiter",
+    "throttling",
+    "rate",
+    "limiter",
+    "rate limiter",
+    "ddos",
+    "dos"
+  ],
+  "author": "Saverious Ipeni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saverious/NodeRateLimiter/issues"
+  },
+  "homepage": "https://github.com/Saverious/NodeRateLimiter#readme"
+}

@@ -4,7 +4,7 @@
   "description": "An in-memory rate limiter for request throttling",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/Saverious/NodeRateLimiter/issues"
   },
-  "homepage": "https://github.com/Saverious/NodeRateLimiter#readme"
+  "homepage": "https://github.com/Saverious/NodeRateLimiter#readme",
+  "devDependencies": {
+    "express": "^4.21.1",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
 }

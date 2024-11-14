@@ -8,7 +8,7 @@ export default function(args) {
     const limiter = new RateLimiter(args);
 
     return function(req, res, next){
-                const clientIP = req.ip || req.connection.remoteAddress;
+        const clientIP = req.ip || req.connection.remoteAddress;
         const isValidIP = isIP(clientIP);
 
         if(!isValidIP){

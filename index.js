@@ -8,7 +8,7 @@ export default function(args) {
     const limiter = new RateLimiter(args);
 
     return function(req, res, next){
-        const clientIP = req.ip || req.connection.remoteAddress;
+                const clientIP = req.ip || req.connection.remoteAddress;
         const isValidIP = isIP(clientIP);
 
         if(!isValidIP){
@@ -17,7 +17,7 @@ export default function(args) {
 
         const clientExists = limiter.getClient(clientIP);
         if(clientExists){
-            const tokens = limiter.getTokens(clientIP);
+            let tokens = limiter.getTokens(clientIP);
             if(tokens === 0){
                 res.statusCode = 429;
                 res.send('You have reached your request limits. Please try again later');

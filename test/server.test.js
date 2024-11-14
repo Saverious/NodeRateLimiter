@@ -15,9 +15,12 @@ beforeEach(() => {
 // tests
 describe('*** make http requests ***', () => {
     it('make consecutive http calls to endpoint', async () => {
-        // set rate limiter middleware
+        // use default rate-limit values
+        // app.use(limiter())
+
+        // use custom rate-limiting values
         app.use(limiter({
-            windowMS: 20,
+            windowMS: 20 * 1000,
             limit: 5
         }));
 

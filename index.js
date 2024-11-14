@@ -4,10 +4,10 @@ import RateLimiter from './lib/limiter.js';
 import { isIP } from 'node:net';
 
 // implement rate limiting
-export default function(args) {
+export default function (args) {
     const limiter = new RateLimiter(args);
 
-    return function(req, res, next){
+    return function (req, res, next) {
         const clientIP = req.ip || req.connection.remoteAddress;
         const isValidIP = isIP(clientIP);
 

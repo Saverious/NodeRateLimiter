@@ -1,9 +1,10 @@
 'use strict';
 
-const { RateLimiter } = require('./lib/limiter');
-const { isIP } = require('node:net');
+import RateLimiter from './lib/limiter.js';
+import { isIP } from 'node:net';
 
-module.exports = function(args) {
+// implement rate limiting
+export default function(args) {
     const limiter = new RateLimiter(args);
 
     return function(req, res, next){

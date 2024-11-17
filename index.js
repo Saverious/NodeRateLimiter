@@ -12,15 +12,15 @@ export default function (args) {
         const isValidIP = isIP(clientIP);
 
         if(!isValidIP){
-            throw new Error('Invalid IP address: ', clientIP);
+            return res.status(400).send('Invalid IP address: ', clientIP);
         }
 
         const clientExists = limiter.getClient(clientIP);
         if(clientExists){
             let tokens = limiter.getTokens(clientIP);
-            if(tokens === 0){
-                res.statusCode = 429;
-                res.send('You have reached your request limits. Please try again later');
+            if(tokens <= 0){
+                // block request
+                res.status(429).send('You have reached your request limits. Please try again later');
             }else{
                 // reset value of token
                 tokens -= 1;
@@ -29,7 +29,6 @@ export default function (args) {
             }
         }else{
             limiter.setClient(clientIP);
-            limiter.setExpiry(clientIP);
             next();
         }
     }

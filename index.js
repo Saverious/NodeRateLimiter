@@ -9,24 +9,21 @@ export default function (args) {
 
     return function (req, res, next) {
         const clientIP = req.ip || req.connection.remoteAddress;
-        const isValidIP = isIP(clientIP);
 
-        if(!isValidIP){
-            return res.status(400).send('Invalid IP address: ', clientIP);
+        if(!isIP(clientIP)){
+            return res.status(400).send(`Invalid IP address: ${clientIP}`);
         }
 
-        const clientExists = limiter.getClient(clientIP);
-        if(clientExists){
+        if(limiter.clientExists(clientIP)){
             let tokens = limiter.getTokens(clientIP);
             if(tokens <= 0){
                 // block request
-                res.status(429).send('You have reached your request limits. Please try again later');
-            }else{
-                // reset value of token
-                tokens -= 1;
-                limiter.__store.set(clientIP, tokens);
-                next();
+                return res.status(429).send('You have reached your maximum request limits. Please try again later');
             }
+
+            // reset value of token
+            limiter.__store.set(clientIP, tokens - 1);
+            next();
         }else{
             limiter.setClient(clientIP);
             next();

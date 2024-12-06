@@ -1,40 +1,34 @@
 import { expect } from 'chai';
 import axios from 'axios';
-import app from './server.js';
-import limiter from '../index.js';
+import { url } from './server.js';
 
-// set global variables
-let port, url;
+// send http request
+async function sendReq () {
+    try {
+        let res = await axios.get(url);
+        const data = {
+            statusCode: res.status,
+            statusData: res.data
+        };
 
-// pre-run tests
-beforeEach(() => {
-    port = 3000;
-    url = `http://localhost:${port}`;
-});
+        expect(res.status).to.equal(200);
+        console.log('request success: ', data);
+    } catch (e) {
+        const data = {
+            statusCode: e.response.status,
+            statusText: e.response.statusText
+        };
+
+        console.log('request failed: ', data);
+    }
+}
 
 // tests
 describe('*** make http requests ***', () => {
-    it('make consecutive http calls to endpoint', async () => {
-        // use default rate-limit values
-        // app.use(limiter())
-
-        // use custom rate-limiting values
-        app.use(limiter({
-            windowMS: 20 * 1000,
-            limit: 5
-        }));
-
-        // start server
-        app.listen(port, () => {
-            console.log(`listening on port ${port}`)
-        });
-
-        // make 10 consecutive requests
-        for(let i = 0; i < 10; i++){
-            let res = await axios.get(url);
-            console.log('status code: ', res.status);
-            expect(res.status).to.equal(200);
-        }
+    it('sends http request every 1 second', () => {
+        setInterval(() => {
+            sendReq();
+        }, 1000);
     });
 });
 

@@ -6,10 +6,10 @@ const app = express();
 const port = 3000;
 const url = `http://localhost:${port}`;
 
-// set 5req/20sec
+// set 3req/5sec
 app.use(limiter({
-    windowMS: 20 * 1000,
-    limit: 5
+    windowMS: 5 * 1000,
+    limit: 3
 }));
 
 // endpoint
@@ -18,8 +18,8 @@ app.get('/', function(req, res) {
 });
 
 // start server
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`listening on port ${port}`)
 });
   
-export {url};
+export {url, server};

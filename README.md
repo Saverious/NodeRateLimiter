@@ -5,7 +5,7 @@ Note: NodeRateLimiter uses in-memory storage to keep track of client requests, t
 
 # Install
 ```text
-npm i rate-limiter
+npm i @saverious/rate-limiter
 ```
 
 # Usage

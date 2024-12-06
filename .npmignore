@@ -1,0 +1,13 @@
+# Exclude test files
+test/
+tests/
+*.test.js
+
+# Exclude config files
+.github/
+*.yml
+
+# Exclude other files
+.nyc_output/
+coverage/
+.env

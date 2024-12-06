@@ -1,6 +1,6 @@
 {
   "name": "@saverious/rate-limiter",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "An in-memory rate limiter for http request throttling",
   "main": "index.js",
   "type": "module",
